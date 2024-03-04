@@ -10,3 +10,4 @@ pay_rate = pay_rate.split(' ')[0]
 pay_rate = float(pay_rate)
 
 print(f"Ukupno: {total_euro(hours, pay_rate)} eura")
+
