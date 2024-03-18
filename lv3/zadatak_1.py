@@ -37,3 +37,39 @@ print(f"U mjerenjima ima {length} mjerenja koja se odnose na marku Audi")
 
 selected_data = selected_data[(selected_data['Cylinders'] == 4)]
 print(f"Prosjecni CO2 4 cilindrasa marke Audi je {selected_data['CO2 Emissions (g/km)'].mean()} g/km")
+
+# Zadatak pod e)
+cylinder_counts = data['Cylinders'].value_counts().sort_index()
+print(cylinder_counts)
+
+cylinder_emissions = data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean()
+print("Cylinder emissions: ")
+print(cylinder_emissions)
+
+# Zadatak pod f)
+diesels = data[(data['Fuel Type'] == 'D')]
+petrols = data[(data['Fuel Type'] == 'Z')]
+
+print(f"Dizeli:\nProsjecno: {diesels['Fuel Consumption City (L/100km)'].mean()} - Medijalno: {diesels['Fuel Consumption City (L/100km)'].median()}")
+print(f"Benzinci:\nProsjecno: {petrols['Fuel Consumption City (L/100km)'].mean()} - Medijalno: {petrols['Fuel Consumption City (L/100km)'].median()}")
+
+# Zadatak pod g)
+four_cylinder_diesels = diesels[(diesels['Cylinders'] == 4)]
+print(f"4 cilindricni dizel koji najvise goriva trosi u gradu jest:\n{four_cylinder_diesels.nlargest(1, 'Fuel Consumption City (L/100km)')}")
+
+# Zadatak pod h)
+manuals = data[(data['Transmission'].str[0] == 'M')]
+length = len(manuals['Make'])
+print(f"Postoji {length} vozila s rucnim mjenjacem")
+
+#Zadatak pod i)
+print(data.corr(numeric_only=True))
+
+'''
+Komentiranje zadnjeg zadatka:
+Velicine imaju dosta veliki korelaciju. Npr. broj obujam motora i broj cilindara su oko 0.9, dok je potrosnja oko 0.8 sto ukazuje na veliku korelaciju.
+Takodjer razlog zasto potrosnja u mpg ima veliku negativnu korelaciju je to sto je ta velicina obrnuta, odnosno, sto automobil vise trosi, broj je manji
+Npr: automobil koji trosi 25 MPG trosi vise nego automobil koji trosi 45 MPG. Dakle, ta velicina je obrnuta L/100km te takodjer, zbog toga dobivamo negativnu
+korelaciju. Sto je negativna korelacija blize -1 to je ona vise obrnuto proporcijalna, dok sto je blize 1, to je vise proporcijonalna. Vrijednosti oko 0
+nemaju nikakvu korelaciju s velicinom.
+'''
