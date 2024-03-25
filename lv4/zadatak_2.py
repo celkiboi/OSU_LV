@@ -29,3 +29,10 @@ y_test_p = linearModel.predict(X_encoded_test)
 
 ME = max_error(y_test, y_test_p)
 print(f"Max Error: {ME}")
+
+error = np.abs(y_test_p, y_test)
+print(np.max(error))
+max_error_id = np.argmax(error)
+
+max_error_model = data.iloc[max_error_id, 1]
+print(max_error_model)
