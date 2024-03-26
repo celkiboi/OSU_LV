@@ -10,7 +10,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, mean_absolu
 # Zadatak pod a)
 data = pd.read_csv('data_C02_emission.csv')
 
-input_variables = ['Engine Size (L)','Cylinders','Fuel Consumption City (L/100km)','Fuel Consumption Hwy (L/100km)','Fuel Consumption Comb (L/100km)','Fuel Consumption Comb (mpg)','CO2 Emissions (g/km)']
+input_variables = ['Engine Size (L)','Cylinders','Fuel Consumption City (L/100km)','Fuel Consumption Hwy (L/100km)','Fuel Consumption Comb (L/100km)','Fuel Consumption Comb (mpg)']
 output = 'CO2 Emissions (g/km)'
 
 X = data[input_variables]

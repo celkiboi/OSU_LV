@@ -10,7 +10,7 @@ from sklearn.metrics import max_error
 
 data = pd.read_csv('data_C02_emission.csv')
 
-input_variables = ['Fuel Type','Engine Size (L)','Cylinders','Fuel Consumption City (L/100km)','Fuel Consumption Hwy (L/100km)','Fuel Consumption Comb (L/100km)','Fuel Consumption Comb (mpg)','CO2 Emissions (g/km)']
+input_variables = ['Fuel Type','Engine Size (L)','Cylinders','Fuel Consumption City (L/100km)','Fuel Consumption Hwy (L/100km)','Fuel Consumption Comb (L/100km)','Fuel Consumption Comb (mpg)']
 output = 'CO2 Emissions (g/km)'
 
 X = data[input_variables]
