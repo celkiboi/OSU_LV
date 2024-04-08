@@ -113,4 +113,10 @@ SVM_model.fit(X_train_n, y_train)
 
 model = svm.SVC(kernel='rbf', C=1, random_state=42)
 scores = cross_val_score(SVM_model, X_train, y_train, cv=5)
-print(scores)
+
+param_grid = {'C': [10 , 100 , 100 ], 'gamma': [10 , 1, 0.1, 0.01 ]}
+svm_gscv = GridSearchCV(model, param_grid , cv=5, scoring ='accuracy', n_jobs =-1)
+svm_gscv.fit(X_train, y_train)
+print(svm_gscv.best_params_)
+print(svm_gscv.best_score_)
+print(svm_gscv.cv_results_)

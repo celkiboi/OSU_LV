@@ -114,3 +114,10 @@ model = KNeighborsClassifier()
 scores = cross_val_score(KNN_model, X_train, y_train, cv=5)
 print(scores)
 
+array = np.arange(1, 101)
+param_grid = {'n_neighbors':array}
+knn_gscv = GridSearchCV(model, param_grid , cv=5, scoring ='accuracy', n_jobs =-1)
+knn_gscv.fit(X_train, y_train)
+print(knn_gscv.best_params_)
+print(knn_gscv.best_score_)
+print(knn_gscv.cv_results_)
