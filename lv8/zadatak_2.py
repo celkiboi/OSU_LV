@@ -30,3 +30,7 @@ for i in range(16):
 
 plt.show()
 
+print('===============')
+print(f"Wrong labels: {wrong_labels.shape[0]} / {prediction_labels.shape[0]}")
+print(f"Accuracy: {(prediction_labels.shape[0] - wrong_labels.shape[0]) / prediction_labels.shape[0]}")
+print('===============')

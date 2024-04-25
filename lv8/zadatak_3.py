@@ -17,11 +17,22 @@ def do_prediction(path):
     image_array = np.expand_dims(image_array, axis=-1)
 
     predicted_label = np.argmax(model.predict(image_array))
-    print(f"Predicted: {predicted_label}")
+    return predicted_label
+
+accurate = []
 
 for i in range(10):
     print("===================================")
     print(f"Testing on number {i}")
-    do_prediction(f"tests/test_{i}.png")
+    prediction = do_prediction(f"tests/test_{i}.png")
+    print(f"Predicted: {prediction}")
+    print(f"Good prediction: {prediction == i}")
+    if prediction == i:
+        accurate.append(prediction)
     print("===================================")
     print()
+
+print("===================================")
+print(f"Accurate predictions: {len(accurate)} / 10")
+print(f"Accuracy: {len(accurate) / 10}")
+print("===================================")
