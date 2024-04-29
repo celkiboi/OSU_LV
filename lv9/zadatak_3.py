@@ -32,20 +32,23 @@ model = keras.Sequential()
 model.add(layers.Input(shape=(32,32,3)))
 model.add(layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.3))
 model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.3))
 model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu'))
+model.add(layers.Dropout(0.3))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.summary()
 
 # definiraj listu s funkcijama povratnog poziva
 my_callbacks = [
-    keras.callbacks.TensorBoard(log_dir = 'logs/cnn',
-                                update_freq = 100)
+    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_dropout_patience', update_freq = 100),
+    keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=1, restore_best_weights=True)
 ]
 
 model.compile(optimizer='adam',
@@ -64,18 +67,5 @@ score = model.evaluate(X_test_n, y_test, verbose=0)
 print(f'Tocnost na testnom skupu podataka: {100.0*score[1]:.2f}')
 
 '''
-    CNN se sastoji od slojeva:
-        - INPUT (32, 32, 3)
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - FLATTEN
-        - DENSE(500, relu)
-        - DENSE(10, softmax)
-
-    sto je ucenje trajalo model je postao tocniji
-    postigli smo tocnost od 0.7386 na skupu za validaciju
+    Process je stopirao na epohi 21. Najbolji rezulati nakon epohe 16.
 '''

@@ -32,19 +32,22 @@ model = keras.Sequential()
 model.add(layers.Input(shape=(32,32,3)))
 model.add(layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.3))
 model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.3))
 model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu'))
+model.add(layers.Dropout(0.3))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.summary()
 
 # definiraj listu s funkcijama povratnog poziva
 my_callbacks = [
-    keras.callbacks.TensorBoard(log_dir = 'logs/cnn',
+    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_dropout',
                                 update_freq = 100)
 ]
 
@@ -64,18 +67,9 @@ score = model.evaluate(X_test_n, y_test, verbose=0)
 print(f'Tocnost na testnom skupu podataka: {100.0*score[1]:.2f}')
 
 '''
-    CNN se sastoji od slojeva:
-        - INPUT (32, 32, 3)
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - CONV2D (32, (3,3), relu)
-        - MAXPOOLING2D((2, 2))
-        - FLATTEN
-        - DENSE(500, relu)
-        - DENSE(10, softmax)
+    Dodavanje jednog dropout sloja je smanjilo epoch_loss na validacijskom skupu
+    Smanjilo je accuracy (0.9854 -> 0.9762) medutim u validacijskom skupu tocnost se povecala (0.7393 -> 0.7589)
 
-    sto je ucenje trajalo model je postao tocniji
-    postigli smo tocnost od 0.7386 na skupu za validaciju
+    Dodavanje jos dva dropout sloja je smanjilo epoch loss u train podatcima na 0.275 dok je na validation podacima smanjilo na 0.8817
+    Accuracy je smanjen na 0.9036 (tran podaci) dok je na validacijskim podacima postignuto (0.7793) [najvece do sad zabiljezeno]
 '''
