@@ -75,7 +75,7 @@ def do_learning(name, batch_size = 64, optimizer = 'adam', use_small_model = Fal
     model.fit(X_train_n,
                 y_train,
                 epochs = 40,
-                batch_size = 64,
+                batch_size = batch_size,
                 callbacks = my_callbacks,
                 validation_split = 0.1)
 
@@ -85,9 +85,9 @@ def do_learning(name, batch_size = 64, optimizer = 'adam', use_small_model = Fal
 
 do_learning("base_line")
 do_learning("small_batch", batch_size=32)
-do_learning("different_learning_rate", optimizer='adamax')
-do_learning("less_layers", use_small_model=True)
-do_learning("small_dataset", use_small_dataset=True)
+# do_learning("different_learning_rate", optimizer='adamax')
+# do_learning("less_layers", use_small_model=True)
+# do_learning("small_dataset", use_small_dataset=True)
 
 '''
 BASELINE:
