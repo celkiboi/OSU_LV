@@ -98,7 +98,7 @@ BASELINE:
 SMALL BATCH:
     Prestao nakon 18 epoha - najbolji model nakon 13te epohe
     Tocnost na testnom skupu podataka 76.49
-    Vrijeme po epohi: 11 - 12 s
+    Vrijeme po epohi: 15 - 16 s
 
 DIFFERENT LEARNING RATE:
     koristen ADAMAX optimizer kako bi se dobio drugaciji learning rate
